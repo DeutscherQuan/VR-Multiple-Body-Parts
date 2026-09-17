@@ -13,7 +13,7 @@
 
 // ===== Bộ lọc =====
 #define ALPHA      0.15f
-#define NUM_POT    3
+#define NUM_POT    5
 
 // ===== WiFi/UDP =====
 #define AP_SSID    "ESP32 Unity Wifi"

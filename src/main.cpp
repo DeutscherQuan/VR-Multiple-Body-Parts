@@ -9,6 +9,8 @@ SensorChannel sensors[NUM_POT] = {
   {0, 0, 0.0f, -1.0f},
   {1, 0, 0.0f, -1.0f},
   {2, 0, 0.0f, -1.0f},
+  {3, 0, 0.0f, -1.0f},
+  {4, 0, 0.0f, -1.0f},
 };
 
 void setup() {
@@ -48,7 +50,7 @@ E0:1.000, → 9 ký tự
 3 cảm biến = 26 x 3 = 78 ký tự
 LED: "LED:1,BTN:1" → 11 ký tự.
 */
-char buf[128];   // tăng kích thước buffer vì thêm field mới
+char buf[192];   // tăng kích thước buffer vì thêm field mới
 int len = 0;
 for (int i = 0; i < NUM_POT; i++) {
   len += snprintf(buf + len, sizeof(buf) - len, "A%d:%d,R%d:%.3f,E%d:%.3f,",

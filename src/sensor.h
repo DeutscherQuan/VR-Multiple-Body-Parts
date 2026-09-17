@@ -17,7 +17,7 @@ inline void emaFilterOne(SensorChannel &s) {
   if (s.emaVal < 0.0f) {
     s.emaVal = s.normVal;                          // khởi tạo lần đầu
   } else {
-    s.emaVal += ALPHA * (s.normVal - s.emaVal);
+    s.emaVal += ALPHA * (s.normVal - s.emaVal); // EMA 공식
   }
 }
 
