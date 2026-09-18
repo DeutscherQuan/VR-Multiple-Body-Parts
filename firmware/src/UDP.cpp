@@ -2,6 +2,7 @@
 #include <WiFi.h>
 #include <WiFiUdp.h>
 #include "config.h"
+#include "ButtonLED.h"
 
 static WiFiUDP udp; // tạo đối tượng quản lý thu/phát UDP
 static IPAddress unityIP; // biến lưu địa chỉ IPv4 của Unity
@@ -26,7 +27,15 @@ void networkPoll(){
     if (packetSize){ // kích thước gói tin > 0
         unityIP = udp.remoteIP(); // trích xuất địa chỉ IP bên gửi
         unityKnown = true; // báo cáo đã có IP hợp lệ
-        udp.flush(); // xoá sạch dữ liệu
+        // udp.flush(); // xoá sạch dữ liệu
+        char incoming[32];
+        int len = udp.read(incoming, sizeof(incoming)-1);
+        incoming[len] = 0;
+
+        if (strcmp(incoming, "LED_TOGGLE")==0){
+            ledState = !ledState;
+            digitalWrite(LED_PIN, ledState ? HIGH : LOW);
+        }
     }
 }
 

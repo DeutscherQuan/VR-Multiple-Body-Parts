@@ -52,11 +52,18 @@ LED: "LED:1,BTN:1" → 11 ký tự.
 */
 char buf[192];   // tăng kích thước buffer vì thêm field mới
 int len = 0;
+
+/*snprintf function*/
+// định dạng dữ liệu linh hoạt: %d, %.3f,..
+// buf + len: vị trí con trỏ - buf trong mảng có thể dùng như con trò
+// chống tràn bộ nhớ đệm: sizeof(buf) - len ---> check sức chứa còn lại để ko ghi quá
+// len += để update độ dài mới --> lát cộng con trỏ đúng chỗ
+// VD: len += 25 --> buf (0x20000000) + 25(10) là 19(16) = 0x20000019.
 for (int i = 0; i < NUM_POT; i++) {
   len += snprintf(buf + len, sizeof(buf) - len, "A%d:%d,R%d:%.3f,E%d:%.3f,",
                    i, sensors[i].rawVal, i, sensors[i].normVal, i, sensors[i].emaVal);
 }
-len += snprintf(buf + len, sizeof(buf) - len, "LED:%d,BTN:%d",
+  len += snprintf(buf + len, sizeof(buf) - len, "LED:%d,BTN:%d",
                  ledState ? 1 : 0, digitalRead(BUTTON_PIN) == LOW ? 1 : 0);
                  
   networkSend(buf);
