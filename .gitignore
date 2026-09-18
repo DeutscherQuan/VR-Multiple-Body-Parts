@@ -11,9 +11,9 @@ firmware/.vscode/launch.json
 firmware/.pio/
 
 # ===== Python =====
-python/__pycache__/
-python/.venv/
-python/*.pyc
+python-chartdrawing/__pycache__/
+python-chartdrawing/.venv/
+python-chartdrawing/*.pyc
 
 # ===== Unity =====
 unity/[Ll]ibrary/
